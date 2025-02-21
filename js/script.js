@@ -105,6 +105,9 @@ sortByYear.addEventListener('click', () => {
     renderMovies();
 });
 
-addMovieBtn.addEventListener('click', addMovie);
+addMovieBtn.addEventListener('click', () => {
+    preventDefault();
+    addMovie();
+} );
 
 document.addEventListener('DOMContentLoaded', renderMovies);
