@@ -10,3 +10,27 @@ body {
     max-width: 800px;
     margin: 1rem auto;
 }
+
+.card {
+    overflow: hidden; /* Evita que el contenido se desborde */
+    cursor: pointer;
+    transition: height 0.3s ease;
+}
+
+.description {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; 
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) */
+    flex-grow: 1; /* Permite que la descripción ocupe el espacio restante */
+}
+
+/* Estilo para cuando la tarjeta está expandida */
+.card.expanded {
+    height: auto; 
+    overflow: visible; 
+}
+
+.card.expanded .description {
+    white-space: normal; /* Permite que el texto se divida en varias líneas */
+    overflow: visible; /* Muestra todo el texto */
+}
