@@ -21,7 +21,7 @@ const initialMovies = [
 ]
 
 const store = JSON.parse(localStorage.getItem('movies'));
-const movieList =  store || initialMovies;
+const movieList =  initialMovies || store ;
 const movieTitle = document.getElementById('movieTitle');
 const movieYear = document.getElementById('movieYear');
 const movieSelect = document.getElementById('movieSelect');
@@ -113,7 +113,6 @@ sortByYear.addEventListener('click', () => {
 });
 
 addMovieBtn.addEventListener('click', () => {
-    // preventDefault();
     addMovie();
 } );
 
