@@ -76,11 +76,18 @@ function renderMovies() {
                     <h5 class="card-title">${movie.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${movie.year}</h6>
                     <p class="card-text">${movie.select}</p>
-                    <p class="card-text">${movie.description}</p>
+                    <p class="card-text description">${movie.description}</p>
                     <button class="btn btn-danger" onclick="deleteMovie(${index})">Eliminar</button>
                 </div>
             </div>
         `;
+        // Agrega un evento de clic para expandir/contraer la tarjeta
+        card.querySelector('.card').addEventListener('click', (event) => {
+            // Evita que el evento se active al hacer clic en el botón "Eliminar"
+            if (!event.target.classList.contains('btn-danger')) {
+                card.querySelector('.card').classList.toggle('expanded');
+            }
+        });
 
         movieListContainer.appendChild(card);
     });
@@ -106,7 +113,7 @@ sortByYear.addEventListener('click', () => {
 });
 
 addMovieBtn.addEventListener('click', () => {
-    preventDefault();
+    // preventDefault();
     addMovie();
 } );
 
