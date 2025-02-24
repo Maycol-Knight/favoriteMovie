@@ -1,4 +1,4 @@
-const initialMovies = [
+/*const initialMovies = [
     {
         title: 'Capitán América: El primer vengador',
         year: 2011,
@@ -18,14 +18,17 @@ const initialMovies = [
         description: 'Two imprisoned'
     },
 
-]
+]*/
 
-const store = JSON.parse(localStorage.getItem('movies'));
-const movieList =  initialMovies || store ;
+let movieList = JSON.parse(localStorage.getItem('movies')) || [];
+
+//const store = JSON.parse(localStorage.getItem('movies'));
+//const movieList =  initialMovies || store ;
 const movieTitle = document.getElementById('movieTitle');
 const movieYear = document.getElementById('movieYear');
 const movieSelect = document.getElementById('movieSelect');
 const movieDescription = document.getElementById('movieDescription');
+const movieImage = document.getElementById('movieImage');
 const addMovieBtn = document.getElementById('addMovieBtn');
 const movieListContainer = document.getElementById('movieList');
 const sortByName = document.getElementById('sortByName');
@@ -35,10 +38,17 @@ function addMovie() {
     const title = movieTitle.value.trim();
     const year = parseInt(movieYear.value.trim());
     const select = movieSelect.value.trim();
+    const image = movieImage.value.trim();
     const description = movieDescription.value.trim();
 
-    const newMovie = { title, year, select, description };
+    const newMovie = { title, year, select, image, description };
+        
+    if (editIndex !== null) {
+        movieList[editIndex] = newMovie;
+        editIndex = null;
+    } else {
         movieList.push(newMovie);
+    }
         saveMovies();
         renderMovies();
         clearForm();
@@ -63,6 +73,20 @@ function saveMovies() {
     localStorage.setItem('movies', JSON.stringify(movieList));
 }
 
+function editMovie(index) {
+    const movie = movieList[index];
+    movieTitle.value = movie.title;
+    movieYear.value = movie.year;
+    movieSelect.value = movie.select;
+    movieImage.value = movie.image;
+    movieDescription.value = movie.description;
+    editIndex = index;
+}
+
+function saveMovies() {
+    localStorage.setItem('movies', JSON.stringify(movieList));
+}
+
 function renderMovies() {
     movieListContainer.innerHTML = '';
 
@@ -72,12 +96,14 @@ function renderMovies() {
 
         card.innerHTML = `
             <div class="card mb-3">
+                    <img src="${movie.image}" class="card-img-top" width="50%" alt="">
                 <div class="card-body">
                     <h5 class="card-title">${movie.title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${movie.year}</h6>
                     <p class="card-text">${movie.select}</p>
                     <p class="card-text description">${movie.description}</p>
                     <button class="btn btn-danger" onclick="deleteMovie(${index})">Eliminar</button>
+                    <button class="btn btn-warning" onclick="editMovie(${index})">Editar</button>
                 </div>
             </div>
         `;
@@ -97,6 +123,7 @@ function clearForm() {
     movieTitle.value = '';
     movieYear.value = '';
     movieSelect.value = '';
+    movieImage.value = '';
     movieDescription.value = '';
 }
 
