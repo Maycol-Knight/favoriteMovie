@@ -17,11 +17,16 @@ const initialMovies = [
         select: 'Ciencia ficción',
         description: 'Two imprisoned'
     },
+];
 
-]
+// Obtener películas de localStorage o inicializar con initialMovies
+let movieList = JSON.parse(localStorage.getItem('movies')) || [...initialMovies];
 
-const store = JSON.parse(localStorage.getItem('movies'));
-const movieList =  initialMovies || store ;
+// Si localStorage está vacío, guardamos las películas iniciales
+if (!localStorage.getItem('movies')) {
+    localStorage.setItem('movies', JSON.stringify(movieList));
+}
+
 const movieTitle = document.getElementById('movieTitle');
 const movieYear = document.getElementById('movieYear');
 const movieSelect = document.getElementById('movieSelect');
@@ -37,20 +42,15 @@ function addMovie() {
     const select = movieSelect.value.trim();
     const description = movieDescription.value.trim();
 
-    const newMovie = { title, year, select, description };
+    if (title && year && select && description) {
+        const newMovie = { title, year, select, description };
         movieList.push(newMovie);
         saveMovies();
         renderMovies();
         clearForm();
-    // if (title && year && select && description) {
-    //     const newMovie = { title, year, select, description };
-    //     movieList.push(newMovie);
-    //     saveMovies();
-    //     renderMovies();
-    //     clearForm();
-    // } else {
-    //     alert("Por favor, complete los campos vacíos.");
-    // }
+    } else {
+        alert("Por favor, complete los campos vacíos.");
+    }
 }
 
 function deleteMovie(index) {
@@ -81,14 +81,6 @@ function renderMovies() {
                 </div>
             </div>
         `;
-        // Agrega un evento de clic para expandir/contraer la tarjeta
-        card.querySelector('.card').addEventListener('click', (event) => {
-            // Evita que el evento se active al hacer clic en el botón "Eliminar"
-            if (!event.target.classList.contains('btn-danger')) {
-                card.querySelector('.card').classList.toggle('expanded');
-            }
-        });
-
         movieListContainer.appendChild(card);
     });
 }
@@ -112,8 +104,7 @@ sortByYear.addEventListener('click', () => {
     renderMovies();
 });
 
-addMovieBtn.addEventListener('click', () => {
-    addMovie();
-} );
+addMovieBtn.addEventListener('click', addMovie);
 
 document.addEventListener('DOMContentLoaded', renderMovies);
+

@@ -59,7 +59,7 @@
             </select>
           <textarea id="movieDescription" class="form-control mt-2 mb-2" placeholder="Descripción de la película" required></textarea>
           <div class="d-flex justify-content-center">
-              <button id="addImage" class="btn btn-primary mt-3 me-4">Agregar Imagen</button>
+              <button id="addImage" class="btn btn-primary mt-3 me-4" data-bs-toggle="modal" data-bs-target="#imageModal">Agregar Imagen</button>
               <button id="addMovieBtn" class="btn btn-success mt-3">Agregar Película</button>
           </div>
         </form> 
@@ -70,10 +70,28 @@
         </div>
   
         <div id="movieList" class="row pb-2"></div>
-  
     </div>
-
   </div>  
+
+  <!-- MODAL PARA SELECCIONAR IMAGEN -->
+  <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Seleccionar Imagen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            </div>
+            <div class="modal-body">
+                <input type="text" id="imageUrl" class="form-control mb-2" placeholder="Ingrese URL de imagen">
+                <input type="file" id="imageFile" class="form-control">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button id="saveImageBtn" class="btn btn-primary">Guardar Imagen</button>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="js/script.js"></script>
     <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
