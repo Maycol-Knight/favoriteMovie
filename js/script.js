@@ -1,26 +1,30 @@
-/*const initialMovies = [
+const initialMovies = [
     {
         title: 'Capitán América: El primer vengador',
         year: 2011,
         select: 'Ciencia ficción',
+        image: 'https://pics.filmaffinity.com/captain_america_the_first_avenger-163477639-mmed.jpg',
         description: 'Two imprisoned'
     },
     {
         title: 'Guardianes de la Galaxia',
         year: 2014,
         select: 'Ciencia ficción',
+        image: 'https://pics.filmaffinity.com/guardians_of_the_galaxy-595487268-msmall.jpg',
         description: 'Two imprisoned'
     },
     {
         title: 'El increíble Hulk',
         year: 2008,
         select: 'Ciencia ficción',
+        image: 'https://pics.filmaffinity.com/the_incredible_hulk-175130941-msmall.jpg',
         description: 'Two imprisoned'
     },
 
-]*/
+]
 
-let movieList = JSON.parse(localStorage.getItem('movies')) || [];
+const store = JSON.parse(localStorage.getItem('movies'));
+let movieList = store || initialMovies;
 
 //const store = JSON.parse(localStorage.getItem('movies'));
 //const movieList =  initialMovies || store ;
@@ -33,6 +37,7 @@ const addMovieBtn = document.getElementById('addMovieBtn');
 const movieListContainer = document.getElementById('movieList');
 const sortByName = document.getElementById('sortByName');
 const sortByYear = document.getElementById('sortByYear');
+let editIndex = null;
 
 function addMovie() {
     const title = movieTitle.value.trim();
@@ -52,15 +57,6 @@ function addMovie() {
         saveMovies();
         renderMovies();
         clearForm();
-    // if (title && year && select && description) {
-    //     const newMovie = { title, year, select, description };
-    //     movieList.push(newMovie);
-    //     saveMovies();
-    //     renderMovies();
-    //     clearForm();
-    // } else {
-    //     alert("Por favor, complete los campos vacíos.");
-    // }
 }
 
 function deleteMovie(index) {
@@ -81,10 +77,6 @@ function editMovie(index) {
     movieImage.value = movie.image;
     movieDescription.value = movie.description;
     editIndex = index;
-}
-
-function saveMovies() {
-    localStorage.setItem('movies', JSON.stringify(movieList));
 }
 
 function renderMovies() {
