@@ -99,7 +99,7 @@ function renderMovies() {
                 </div>
             </div>
         `;
-        // Agrega un evento de clic para expandir/contraer la tarjeta
+        // Evento de clic para expandir/contraer la tarjeta
         card.querySelector('.card').addEventListener('click', (event) => {
             // Evita que el evento se active al hacer clic en el botón "Eliminar"
             if (!event.target.classList.contains('btn-danger')) {
@@ -136,3 +136,11 @@ addMovieBtn.addEventListener('click', () => {
 } );
 
 document.addEventListener('DOMContentLoaded', renderMovies);
+
+// Agrega un evento de clic para expandir/contraer la tarjeta
+card.querySelector('.card').addEventListener('click', (event) => {
+    // Evita que el evento se active al hacer clic en el botón "Eliminar"
+    if (!event.target.classList.contains('btn-danger')) {
+        card.querySelector('.card').classList.toggle('expanded');
+    }
+});
