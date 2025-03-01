@@ -3,21 +3,21 @@ const initialMovies = [
         title: 'Capitán América: El primer vengador',
         year: 2011,
         select: 'Ciencia ficción',
-        image: 'https://pics.filmaffinity.com/captain_america_the_first_avenger-163477639-mmed.jpg',
+        image: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/95C976CA3FF6E5D7434874C3D705E133D8F1AF970ED3A319D90CD7C8BC36A83D/scale?width=1200&aspectRatio=1.78&format=webp',
         description: 'Two imprisoned'
     },
     {
         title: 'Guardianes de la Galaxia',
         year: 2014,
         select: 'Ciencia ficción',
-        image: 'https://pics.filmaffinity.com/guardians_of_the_galaxy-595487268-msmall.jpg',
+        image: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/6173AE830B8DDAC16FD7689AD142E925FAE5E33C9B69B5000623E849EEE880B9/scale?width=1200&aspectRatio=1.78&format=webp',
         description: 'Two imprisoned'
     },
     {
         title: 'El increíble Hulk',
         year: 2008,
         select: 'Ciencia ficción',
-        image: 'https://pics.filmaffinity.com/the_incredible_hulk-175130941-msmall.jpg',
+        image: 'https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/AB82992845C402475BDF59E0090118A3E1C8DAB5EEE1A38ACD4313147B0DFE6F/scale?width=1200&aspectRatio=1.78&format=webp',
         description: 'Two imprisoned'
     },
 
@@ -51,7 +51,7 @@ function addMovie() {
     if (editIndex !== null) {
         movieList[editIndex] = newMovie;
         editIndex = null;
-    } else {
+    } else if(title && year && select && image && description) {
         movieList.push(newMovie);
     }
         saveMovies();
@@ -136,11 +136,3 @@ addMovieBtn.addEventListener('click', () => {
 } );
 
 document.addEventListener('DOMContentLoaded', renderMovies);
-
-// Agrega un evento de clic para expandir/contraer la tarjeta
-card.querySelector('.card').addEventListener('click', (event) => {
-    // Evita que el evento se active al hacer clic en el botón "Eliminar"
-    if (!event.target.classList.contains('btn-danger')) {
-        card.querySelector('.card').classList.toggle('expanded');
-    }
-});
